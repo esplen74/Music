@@ -165,6 +165,7 @@ const app = {
         _this.NextSong();
         audio.play();
       }
+      _this.render()
     };
     playlist.onclick = function (e) {
       const songNode = e.target.closest(".song:not(.active)");
@@ -196,13 +197,12 @@ const app = {
       this.currentIndex = 0;
     }
     this.loadCurrentSong();
-    _this.render();
   },
   scrollToActiveSong: function () {
     setTimeout(() => {
       $(".song.active").scrollIntoView({
         behavior: "smooth",
-        block: "center",
+        block: "nearest",
       });
     }, 300);
   },
@@ -212,7 +212,6 @@ const app = {
       this.currentIndex = this.songs.length - 1;
     }
     this.loadCurrentSong();
-    _this.render();
   },
   randomSong: function () {
     var newIndext;

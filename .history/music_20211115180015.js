@@ -89,9 +89,7 @@ const app = {
   render: function () {
     const htmls = this.songs.map((song, index) => {
       return `
-      <div class="song ${
-        index === this.currentIndex ? "active" : ""
-      }"  data-index="${index}">
+      <div class="song">
       <div class="thumb" style="background-image:url('${song.image}')"></div>
       <div class="body">
         <h3 class="title">${song.name}</h3>
@@ -134,9 +132,9 @@ const app = {
       player.classList.add("playing");
       cdAnimate.play();
     };
-    audio.onended = function () {
-      btnNext.click();
-    };
+    audio.onended =function() {
+      btnNext.click()
+    }
     // Khi song bị pausse
     audio.onpause = function () {
       isPlaying = false;
@@ -166,19 +164,6 @@ const app = {
         audio.play();
       }
     };
-    playlist.onclick = function (e) {
-      const songNode = e.target.closest(".song:not(.active)");
-      if (songNode || e.target.closest(".option")) {
-        if (songNode) {
-          console.log(songNode.dataset.index);
-          _this.currentIndex = Number(songNode.dataset.index);
-          _this.loadCurrentSong();
-          _this.render();
-          audio.play();
-        }
-      }
-    };
-
     btnPrev.onclick = function () {
       _this.PreSong();
       audio.play();
@@ -196,15 +181,6 @@ const app = {
       this.currentIndex = 0;
     }
     this.loadCurrentSong();
-    _this.render();
-  },
-  scrollToActiveSong: function () {
-    setTimeout(() => {
-      $(".song.active").scrollIntoView({
-        behavior: "smooth",
-        block: "center",
-      });
-    }, 300);
   },
   PreSong: function () {
     this.currentIndex--;
@@ -212,7 +188,6 @@ const app = {
       this.currentIndex = this.songs.length - 1;
     }
     this.loadCurrentSong();
-    _this.render();
   },
   randomSong: function () {
     var newIndext;
@@ -240,7 +215,6 @@ const app = {
     this.loadCurrentSong();
     // xử lý các sự kiện
     this.handleEvent();
-    this.scrollToActiveSong();
     // Render bài hát
     this.render();
   },

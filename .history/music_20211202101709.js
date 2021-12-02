@@ -196,13 +196,12 @@ const app = {
       this.currentIndex = 0;
     }
     this.loadCurrentSong();
-    _this.render();
   },
   scrollToActiveSong: function () {
     setTimeout(() => {
       $(".song.active").scrollIntoView({
         behavior: "smooth",
-        block: "center",
+        block: "nearest",
       });
     }, 300);
   },
@@ -212,7 +211,6 @@ const app = {
       this.currentIndex = this.songs.length - 1;
     }
     this.loadCurrentSong();
-    _this.render();
   },
   randomSong: function () {
     var newIndext;
