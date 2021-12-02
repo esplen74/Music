@@ -245,4 +245,5 @@ const app = {
     this.render();
   },
 };
+// chỗ này là làm như thế nào
 app.start();
